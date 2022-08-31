@@ -1,12 +1,28 @@
 {
-  "name": "kubik_media_gallery",
-  "version": "0.1.0",
+  "name": "@kubik-cms/kubik_interface_elements",
+  "version": "0.1.1",
+  "license": "MIT",
+  "author": "Primate Inc.",
+  "contributors": [
+    "Bart Oleszczyk <bart@primate.co.uk>"
+  ],
+  "bugs": {
+    "url": "https://github.com/kubik-cms/kubik_interface_elements/issues"
+  },
+  "homepage": "https://github.com/kubik-cms/kubik_interface_elements",
   "targets": {
     "js": {
       "source": "src/javascripts/kubik_interface_elements.js",
-      "distDir": "./app/assets/javascripts/"
+      "distDir": "./dist"
     }
   },
+   "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kubik-cms/kubik_interface_elements.git"
+  },
+  "files": [
+    "dist/kubik_interface_elements.js"
+  ],
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel",
@@ -14,8 +30,11 @@
     "watch": "parcel watch"
   },
   "devDependencies": {
+    "@parcel/compressor-brotli": "^2.7.0",
+    "@parcel/compressor-gzip": "^2.7.0",
     "@parcel/transformer-sass": "2.3.2",
-    "parcel": "^2.3.2"
+    "parcel": "^2.3.2",
+    "parcel-plugin-static-files-copy": "^2.6.0"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",

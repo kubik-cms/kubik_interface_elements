@@ -21,6 +21,7 @@ export default class extends Controller {
   }
 
   connect() {
+    console.log('modal connected')
   }
 
   get modalTemplate() {
@@ -30,6 +31,7 @@ export default class extends Controller {
   selectModal(e) {
     if(this.modalActionValue == 'return') {
       const [targetControllerName, targetControllerId] = this.modalReturnControllerValue.split('#')
+
       const targetController = this.application.getControllerForElementAndIdentifier(document.getElementById(targetControllerId), targetControllerName)
       targetController.receiveModalReturn({ payload: { kubik_media_upload_id: parseInt(e.currentTarget.dataset.selectedKubikMediaUploadId), thumb: e.currentTarget.dataset.selectedThumb }, return_payload: this.modalReturnPayloadValue})
       this.closeModal()
