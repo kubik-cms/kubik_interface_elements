@@ -40,7 +40,6 @@
     "parcel-plugin-static-files-copy": "^2.6.0"
   },
   "dependencies": {
-    "@hotwired/stimulus": "^3.0.1",
-    "@hotwired/turbo": "^7.1.0"
+    "@hotwired/stimulus": "^3.0.1"
   }
 }
