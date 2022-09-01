@@ -1,6 +1,5 @@
 {
-  "name": "@kubik-cms/kubik_interface_elements",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "license": "MIT",
   "author": "Primate Inc.",
   "contributors": [
@@ -21,7 +20,7 @@
     "url": "git://github.com/kubik-cms/kubik_interface_elements.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "files": [
     "dist/kubik_interface_elements.js"
@@ -41,5 +40,11 @@
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1"
+  },
+  "description": "Add the ability to preview individual model pages.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }
