@@ -19,6 +19,7 @@ RUN apt-get install -y \
             postgresql-client \
             apt-transport-https \
             ruby-chunky-png \
+            npm \
             libv8-dev \
             libvips \
             libvips-dev \

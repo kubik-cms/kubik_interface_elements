@@ -9,7 +9,6 @@
 /dist
 /tmp/
 /node_modules
-/dist
 .active_admin_sample/public/uploads
 .npmrc
 .active_admin_sample/node_modules
