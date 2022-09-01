@@ -10,6 +10,7 @@
 /tmp/
 /node_modules
 .active_admin_sample/public/uploads
+.npmrc
 .active_admin_sample/node_modules
 /.parcel-cache
 /public/uploads

@@ -20,6 +20,9 @@
     "type": "git",
     "url": "git+https://github.com/kubik-cms/kubik_interface_elements.git"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "files": [
     "dist/kubik_interface_elements.js"
   ],
