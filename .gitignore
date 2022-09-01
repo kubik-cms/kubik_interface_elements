@@ -6,7 +6,6 @@
 /doc/
 /pkg/
 /spec/reports/
-/dist
 /tmp/
 /node_modules
 .active_admin_sample/public/uploads
