@@ -2,7 +2,7 @@ name: Ruby
 
 on: [push,pull_request]
 
-jobs:
+jobstype
   build:
     runs-on: ubuntu-latest
     steps:

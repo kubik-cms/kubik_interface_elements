@@ -8,6 +8,8 @@
 /spec/reports/
 /tmp/
 /node_modules
+/package/node_modules
+/package/dist
 .active_admin_sample/public/uploads
 .npmrc
 .active_admin_sample/node_modules

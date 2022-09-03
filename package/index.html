@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Kubik Modal Component" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Kubik Modal Controller</title>
+
+    <script type="module" defer>
+      import { Application } from '@hotwired/stimulus'
+      import KubikModal from './src/index'
+
+      const application = Application.start()
+      application.register('kubik-modal', KubikModal)
+    </script>
+  </head>
+
+  <body></body>
+</html>
