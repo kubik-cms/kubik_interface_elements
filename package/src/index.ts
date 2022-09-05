@@ -58,6 +58,7 @@ export default class extends Controller {
         document.getElementById(targetControllerId),
         targetControllerName
       )
+      // @ts-ignore
       targetController.receiveModalReturn({
         payload: {
           kubik_media_upload_id: parseInt(
@@ -84,10 +85,10 @@ export default class extends Controller {
   modalSrcValueChanged (): void {
     if (this.hasModalFrameTarget) {
       if (this.modalSrcValue === '') {
-        this.modalFrameTarget.src = this.modalSrcValue
+        this.modalFrameTarget.setAttribute('src', this.modalSrcValue)
         this.modalFrameTarget.innerHTML = ''
       } else {
-        this.modalFrameTarget.src = this.modalSrcValue
+        this.modalFrameTarget.setAttribute('src', this.modalSrcValue)
       }
     }
   }
@@ -100,7 +101,7 @@ export default class extends Controller {
 
   openModal (e: Event): void {
     const target = e.currentTarget as HTMLElement
-    this.modalSrcValue = target.attributes.src.value
+    this.modalSrcValue = target.getAttribute('src')
     this.modalHeaderValue = target.dataset.kubikModalHeaderText
     this.modalActionValue = target.dataset.kubikModalAction
     this.modalReturnControllerValue =

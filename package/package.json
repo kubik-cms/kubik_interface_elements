@@ -1,6 +1,6 @@
 {
   "name": "@kubik-cms/kubik_interface_elements",
-  "version": "0.1.4",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "Primate Inc.",
   "contributors": [
@@ -11,12 +11,6 @@
   },
   "homepage": "https://github.com/kubik-cms/kubik_interface_elements",
   "private": false,
-  "targets": {
-    "js": {
-      "source": "src/javascripts/index.js",
-      "distDir": "./dist"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/kubik-cms/kubik_interface_elements.git"
@@ -24,8 +18,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/kubik_modal_controller.umd.js",
-  "module": "dist/kubik_modal_controller.es.js",
+  "main": "dist/kubik_interface_elements.umd.js",
+  "module": "dist/kubik_interface_elements.es.js",
   "scripts": {
     "format": "prettier-standard '**/*.{ts,css,html}' --format",
     "lint": "prettier-standard '**/*.{ts,css,html}' --lint",
@@ -33,14 +27,14 @@
     "prod": "vite build",
     "build": "tsc --noEmit && vite build",
     "test": "BABEL_ENV=test jest",
-    "np": "np --no-2fa"
+    "np": "np --no-2fa --branch master"
   },
   "devDependencies": {
     "jest": "^29.0.1",
     "np": "^7.6.2",
     "prettier-standard": "^16.4.1",
     "typescript": "^4.8.2",
-    "vite": "^3.0.9"
+    "vite": "^2.7.13"
   },
   "peerDependencies": {
     "@hotwired/stimulus": "^3.0.1"
