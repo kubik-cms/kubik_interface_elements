@@ -1,3 +1,4 @@
+import modalElement from './templates/modal'
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
@@ -32,6 +33,9 @@ export default class extends Controller {
   }
 
   initialize (): void {
+    if (!document.getElementById('kubik-modal-template')) {
+      document.head.insertAdjacentHTML('beforeend', modalElement)
+    }
     this._renderDOMElements()
     document.addEventListener('keydown', event => {
       if (event.keyCode === 27) {
