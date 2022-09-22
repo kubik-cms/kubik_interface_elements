@@ -10,6 +10,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-package
+    ports:
+      - "3000:3001"
     volumes:
       - ./package/:/kubik_interface_elements
   source:

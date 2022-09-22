@@ -9,10 +9,11 @@
 
     <script type="module" defer>
       import { Application } from '@hotwired/stimulus'
-      import KubikModal from './src/index'
+      import { ModalController, modalInit } from './src/index'
 
       const application = Application.start()
-      application.register('kubik-modal', KubikModal)
+      application.register('kubik-modal', ModalController)
+      modalInit()
     </script>
   </head>
 

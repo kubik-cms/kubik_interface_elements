@@ -1,6 +1,6 @@
 {
-  "name": "@kubik-cms/kubik_interface_elements",
-  "version": "0.1.1",
+  "name": "@kubik-cms/interface_elements",
+  "version": "0.1.7",
   "license": "MIT",
   "author": "Primate Inc.",
   "contributors": [
@@ -18,12 +18,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/kubik_interface_elements.umd.js",
-  "module": "dist/kubik_interface_elements.es.js",
+  "main": "dist/interface_elements.umd.js",
+  "module": "dist/interface_elements.es.js",
   "scripts": {
     "format": "prettier-standard '**/*.{ts,css,html}' --format",
     "lint": "prettier-standard '**/*.{ts,css,html}' --lint",
-    "dev": "vite",
+    "dev": "vite --host",
     "prod": "vite build",
     "build": "tsc --noEmit && vite build",
     "test": "BABEL_ENV=test jest",
