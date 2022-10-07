@@ -26,9 +26,9 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
-  spec.add_dependency "activeadmin", ">= 1.2.1"
+  spec.add_dependency "activeadmin"
   spec.add_development_dependency "pg"
-  spec.add_dependency "rails", "~> 6.0"
+  spec.add_dependency "rails"
   spec.add_development_dependency "warning"
 
   # For more information and examples about making a new gem, checkout our
