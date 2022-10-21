@@ -1,6 +1,6 @@
-# KubikMediaLibrary
+# KubikInterfaceElements
 
-Add the ability to preview individual model pages.
+Shared config elements for Kubik ActiveAdmin adapter
 
 ## Installation
 
