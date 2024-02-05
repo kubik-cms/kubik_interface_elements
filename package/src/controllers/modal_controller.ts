@@ -75,10 +75,14 @@ export default class extends Controller {
       // @ts-ignore
       targetController.receiveModalReturn({
         payload: {
+          kubik_media_upload_id: parseInt(
+            target.dataset.selectedKubikMediaUploadId
+          ),
           id: parseInt(
             target.dataset.selectedKubikMediaUploadId
           ),
-          thumb: target.dataset.selectedThumb
+          thumb: target.dataset.selectedThumb,
+          additional_information: target.dataset.selectedAdditionalInfo
         },
         return_payload: this.modalReturnPayloadValue
       })
