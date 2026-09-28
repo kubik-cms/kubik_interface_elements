@@ -1,0 +1,20 @@
+<%# locals: tags (array of strings), wrapper_class: optional extra BEM block, limit: optional max chips (uses latest when truncated) %>
+<% tag_array = Array(tags).compact %>
+<% limit = local_assigns[:limit] %>
+<% if limit.present? && tag_array.size > limit %>
+  <% visible_tags = tag_array.last(limit) %>
+  <% extra_count = tag_array.size - limit %>
+<% else %>
+  <% visible_tags = tag_array %>
+  <% extra_count = 0 %>
+<% end %>
+<% if visible_tags.present? %>
+  <div class="<%= ["kubik-interface-tag-list", local_assigns[:wrapper_class]].compact.join(" ") %>">
+    <% visible_tags.each do |tag| %>
+      <span class="kubik-interface-tag-list__chip"><%= tag %></span>
+    <% end %>
+    <% if extra_count.positive? %>
+      <span class="kubik-interface-tag-list__more">+<%= extra_count %> more</span>
+    <% end %>
+  </div>
+<% end %>

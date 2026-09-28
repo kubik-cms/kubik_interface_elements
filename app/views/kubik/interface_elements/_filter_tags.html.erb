@@ -1,0 +1,70 @@
+<%# locals: name, match_name, label:, selected_tags:, match:, suggestions_url:, autosubmit: true, autosubmit_debounce_ms: 0, untagged_name: nil, untagged_checked: false, untagged_label: "Untagged only" %>
+<% selected_tags = Array(local_assigns[:selected_tags]).map(&:to_s).map(&:strip).reject(&:blank?) %>
+<% match_value = local_assigns.fetch(:match, "or").to_s.downcase %>
+<% match_value = "or" unless %w[or and].include?(match_value) %>
+<% field_name = name.to_s %>
+<% field_id = field_name.tr("[]", "_").gsub(/__+/, "_") %>
+<% tag_value = selected_tags.join(", ") %>
+<% untagged_name = local_assigns[:untagged_name] %>
+<% untagged_checked = local_assigns.fetch(:untagged_checked, false) %>
+<% with_untagged = untagged_name.present? %>
+<% field_classes = ["kubik-interface-filters__field", "kubik-interface-filters__field--tags"] %>
+<% field_attrs = {} %>
+<% if with_untagged %>
+  <% field_attrs[:data] = { controller: "kubik-filter-tags-section" } %>
+<% end %>
+<%= content_tag(:div, class: field_classes.join(" "), **field_attrs) do %>
+  <%= label_tag field_id, local_assigns.fetch(:label, "Tags") %>
+  <div class="kubik-interface-filters__tags-controls<%= with_untagged ? " kubik-interface-filters__tags-controls--with-untagged" : "" %>">
+    <div class="kubik-interface-filters__tags-input-group"<%= with_untagged ? ' data-kubik-filter-tags-section-target="section"'.html_safe : "" %>>
+      <% if kubik_tags_field_available? %>
+        <%= render partial: "kubik/interface_elements/tags_field_control",
+                   locals: {
+                     field_name: field_name,
+                     field_id: field_id,
+                     value: tag_value,
+                     label: local_assigns.fetch(:label, "Tags"),
+                     suggestions_url: local_assigns[:suggestions_url],
+                     suggestions: [],
+                     multiselect: true,
+                     value_format: :array,
+                     allow_create: true,
+                     min_length: 1,
+                     separator: ", ",
+                     input_html: { class: "kubik-interface-filters__text-input" },
+                     query_input_id: "#{field_id}_query",
+                     autosubmit: local_assigns.fetch(:autosubmit, true),
+                     autosubmit_debounce_ms: local_assigns.fetch(:autosubmit_debounce_ms, 0)
+                   } %>
+      <% else %>
+        <%= text_field_tag field_name, tag_value,
+              id: field_id,
+              class: "kubik-interface-filters__text-input",
+              onchange: (local_assigns.fetch(:autosubmit, true) ? "this.form.requestSubmit()" : nil) %>
+      <% end %>
+      <% if local_assigns[:match_name].present? %>
+        <%= render partial: "kubik/interface_elements/filter_tag_match",
+                   locals: {
+                     name: match_name,
+                     selected: match_value,
+                     autosubmit: local_assigns.fetch(:autosubmit, true)
+                   } %>
+      <% end %>
+    </div>
+    <% if with_untagged %>
+      <% untagged_submit = local_assigns.fetch(:autosubmit, true) ? "this.form.requestSubmit()" : nil %>
+      <label class="kubik-interface-filters__checkbox-label kubik-interface-filters__untagged-toggle">
+        <%= check_box_tag untagged_name,
+                          "1",
+                          untagged_checked,
+                          class: "kubik-interface-filters__checkbox-input",
+                          data: {
+                            kubik_filter_tags_section_target: "untagged",
+                            action: "change->kubik-filter-tags-section#syncDisabled"
+                          },
+                          onchange: untagged_submit %>
+        <span><%= local_assigns.fetch(:untagged_label, "Untagged only") %></span>
+      </label>
+    <% end %>
+  </div>
+<% end %>

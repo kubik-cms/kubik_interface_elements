@@ -1,0 +1,8 @@
+<%# locals: name, label, options (array of [label, value]), selected, autosubmit: true %>
+<div class="kubik-interface-filters__field">
+  <%= label_tag name, label %>
+  <%= select_tag name,
+        options_for_select(options, selected),
+        class: "kubik-interface-filters__select-input",
+        onchange: (local_assigns.fetch(:autosubmit, true) ? "this.form.requestSubmit()" : nil) %>
+</div>

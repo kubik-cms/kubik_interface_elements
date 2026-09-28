@@ -1,6 +1,8 @@
+require_relative "lib/kubik_interface_elements/version"
+
 Gem::Specification.new do |spec|
   spec.name          = "kubik_interface_elements"
-  spec.version       = "0.2.7"
+  spec.version       = KubikInterfaceElements::VERSION
   spec.authors       = ["Bart Oleszczyk"]
   spec.email         = ["bart@primate.co.uk"]
 

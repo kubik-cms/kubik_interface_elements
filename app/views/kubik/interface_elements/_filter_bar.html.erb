@@ -1,0 +1,31 @@
+<%# locals: url, clear_url, turbo_frame:, clear_turbo_frame:, modal: false, autosubmit: true, compact: false, fields_html, tags_html: nil %>
+<% filter_classes = ["kubik-interface-filters"] %>
+<% filter_classes << "kubik-interface-filters--compact" if local_assigns.fetch(:compact, false) %>
+<% filter_classes << "kubik-interface-filters--split-tags" if local_assigns[:tags_html].present? %>
+<% clear_frame = local_assigns[:clear_turbo_frame] %>
+<% clear_link_data = { turbo: true } %>
+<% clear_link_data[:turbo_frame] = clear_frame if clear_frame.present? %>
+<%= form_with url: url,
+              method: :get,
+              html: {
+                class: filter_classes.join(" "),
+                data: { turbo: true, turbo_frame: turbo_frame }
+              } do %>
+  <% if local_assigns[:modal] %>
+    <%= hidden_field_tag :modal, "true" %>
+  <% end %>
+  <div class="kubik-interface-filters__toolbar">
+    <%= link_to "Clear filters",
+          clear_url,
+          class: "kubik-interface-filters__clear",
+          data: clear_link_data %>
+  </div>
+  <div class="kubik-interface-filters__fields">
+    <%= fields_html %>
+  </div>
+  <% if local_assigns[:tags_html].present? %>
+    <div class="kubik-interface-filters__tags-row">
+      <%= tags_html %>
+    </div>
+  <% end %>
+<% end %>

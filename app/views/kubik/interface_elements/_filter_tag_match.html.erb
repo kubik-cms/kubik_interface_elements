@@ -1,0 +1,11 @@
+<%# locals: name, selected:, autosubmit: true %>
+<% selected = local_assigns.fetch(:selected, "or").to_s.downcase %>
+<% selected = "or" unless %w[or and].include?(selected) %>
+<%= render partial: "kubik/interface_elements/filter_toggle_group",
+           locals: {
+             name: name,
+             selected: selected,
+             autosubmit: local_assigns.fetch(:autosubmit, true),
+             aria_label: "Tag match",
+             options: [["Any", "or"], ["All", "and"]]
+           } %>

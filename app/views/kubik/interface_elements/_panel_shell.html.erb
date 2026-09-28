@@ -1,0 +1,4 @@
+<%# layout: locals html_class, html %>
+<%= tag.div(class: ["kubik-panel-shell", html_class].compact.join(" "), **html) do %>
+  <%= yield %>
+<% end %>

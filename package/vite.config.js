@@ -8,10 +8,10 @@ export default defineConfig({
       name: 'kubik-modal'
     },
     rollupOptions: {
-      external: ['stimulus'],
+      external: ['@hotwired/stimulus'],
       output: {
         globals: {
-          stimulus: 'Stimulus'
+          '@hotwired/stimulus': 'Stimulus'
         }
       }
     }

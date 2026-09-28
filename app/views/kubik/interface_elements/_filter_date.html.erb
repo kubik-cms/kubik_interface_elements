@@ -1,0 +1,8 @@
+<%# locals: name, label, value, autosubmit: true %>
+<div class="kubik-interface-filters__field">
+  <%= label_tag name, label %>
+  <%= date_field_tag name,
+        value,
+        class: "kubik-interface-filters__date-input",
+        onchange: (local_assigns.fetch(:autosubmit, true) ? "this.form.requestSubmit()" : nil) %>
+</div>

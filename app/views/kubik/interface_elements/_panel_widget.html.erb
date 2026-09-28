@@ -1,0 +1,6 @@
+<%# layout: locals title, title_modifier, html_class %>
+<% title_classes = ["kubik-panel-widget__title", title_modifier].compact.join(" ") %>
+<div class="kubik-panel-widget <%= html_class %>">
+  <h3 class="<%= title_classes %>"><%= title %></h3>
+  <%= yield %>
+</div>

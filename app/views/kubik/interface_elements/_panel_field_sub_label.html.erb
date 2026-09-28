@@ -1,0 +1,6 @@
+<%# locals: text, for_id: nil %>
+<% if for_id.present? %>
+  <%= label_tag for_id, text, class: "kubik-panel-field__sub-label" %>
+<% else %>
+  <span class="kubik-panel-field__sub-label"><%= text %></span>
+<% end %>

@@ -1,0 +1,17 @@
+<%# locals: name, label, value, autosubmit: true, debounce_ms: 400 %>
+<% debounce_ms = local_assigns.fetch(:debounce_ms, 400) %>
+<% text_data = {} %>
+<% if local_assigns.fetch(:autosubmit, true) %>
+  <% text_data = {
+    controller: "kubik-debounced-form-submit",
+    action: "input->kubik-debounced-form-submit#schedule",
+    kubik_debounced_form_submit_delay_value: debounce_ms
+  } %>
+<% end %>
+<div class="kubik-interface-filters__field kubik-interface-filters__field--text">
+  <%= label_tag name, label %>
+  <%= text_field_tag name, value,
+        class: "kubik-interface-filters__text-input",
+        autocomplete: "off",
+        data: text_data %>
+</div>

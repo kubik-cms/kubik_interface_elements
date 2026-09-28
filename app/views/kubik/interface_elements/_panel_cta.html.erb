@@ -1,0 +1,15 @@
+<%# locals: lead:, tone: "default", modifier: nil, aria_label:, status: nil, body: nil %>
+<% tone_class = tone == "brand" ? "kubik-panel-cta--brand" : nil %>
+<%= tag.div(
+      class: ["kubik-panel-cta", tone_class, modifier].compact.join(" "),
+      role: "region",
+      aria: { label: aria_label }
+    ) do %>
+  <p class="kubik-panel-cta__lead"><%= lead %></p>
+  <% if status.present? %>
+    <%= status %>
+  <% end %>
+  <% if body.present? %>
+    <%= body %>
+  <% end %>
+<% end %>

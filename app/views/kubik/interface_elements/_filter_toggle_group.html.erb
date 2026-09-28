@@ -1,0 +1,12 @@
+<%# locals: name, options:, selected:, autosubmit: true, aria_label: nil %>
+<% selected = local_assigns.fetch(:selected, options.first&.last).to_s %>
+<% submit_action = local_assigns.fetch(:autosubmit, true) ? "this.form.requestSubmit()" : nil %>
+<% group_label = local_assigns[:aria_label] || name.to_s.humanize %>
+<div class="kubik-interface-toggle-group kubik-interface-filters__toggle-group" role="radiogroup" aria-label="<%= group_label %>">
+  <% options.each do |option_label, value| %>
+    <label class="kubik-interface-toggle-group__option">
+      <%= radio_button_tag name, value, selected == value.to_s, onchange: submit_action, class: "kubik-interface-toggle-group__input" %>
+      <span class="kubik-interface-toggle-group__label"><%= option_label %></span>
+    </label>
+  <% end %>
+</div>

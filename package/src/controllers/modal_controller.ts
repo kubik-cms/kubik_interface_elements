@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
+import { DEFAULT_MODAL_FRAME_ID, modalTemplateHtml } from '../templates/modal'
 
 export default class extends Controller {
   modalTemplateTarget: HTMLElement
@@ -14,6 +15,10 @@ export default class extends Controller {
   hasModalHeaderTarget: Boolean
   hasModalFrameTarget: Boolean
   hasModalContainerTarget: Boolean
+
+  private onTurboLoad = (): void => {
+    this._renderDOMElements()
+  }
 
   static targets = [
     'modalTemplate',
@@ -32,19 +37,7 @@ export default class extends Controller {
   }
 
   initialize (): void {
-    document.head.insertAdjacentHTML('beforeend',
-      `<template id='kubik-modal-template' data-kubik-modal-target='modalTemplate'>
-         <div id='kubik-modal' class='kubik-modal-element' data-kubik-modal-target='modalContainer'>
-          <div class='kubik-modal-background' data-action='click->kubik-modal#closeModal'>
-        </div>
-      <div class='kubik-modal-element-window'>
-        <div data-kubik-modal-target='modalHeader' class='h4 kubik-modal-title-bar'></div>
-        <turbo-frame id='media_library_frame' class='kubik-modal-element-content' data-kubik-modal-target='modalFrame'>
-        </turbo-frame>
-      </div>
-    </div>
-  </template>
-`)
+    document.head.insertAdjacentHTML('beforeend', modalTemplateHtml(DEFAULT_MODAL_FRAME_ID))
   }
 
   connect (): void {
@@ -54,6 +47,11 @@ export default class extends Controller {
         this.closeModal()
       }
     })
+    document.addEventListener('turbo:load', this.onTurboLoad)
+  }
+
+  disconnect (): void {
+    document.removeEventListener('turbo:load', this.onTurboLoad)
   }
 
   get modalTemplate (): string {
@@ -118,7 +116,14 @@ export default class extends Controller {
   }
 
   openModal (e: Event): void {
+    this._renderDOMElements()
     const target = e.currentTarget as HTMLElement
+    const frameId =
+      target.dataset.kubikModalFrameId ||
+      DEFAULT_MODAL_FRAME_ID
+    if (this.hasModalFrameTarget && this.modalFrameTarget.id !== frameId) {
+      this.modalFrameTarget.id = frameId
+    }
     this.modalSrcValue = target.getAttribute('src')
     this.modalHeaderValue = target.dataset.kubikModalHeaderText
     this.modalActionValue = target.dataset.kubikModalAction

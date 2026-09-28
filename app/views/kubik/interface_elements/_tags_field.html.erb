@@ -1,0 +1,26 @@
+<%# locals: field_name, field_id, value, label: "Tags", hint:, suggestions_url, suggestions, multiselect,
+           value_format, allow_create, min_length, separator, input_html, query_input_id %>
+<li class="string input optional stringish kubik-interface-tags-field" id="<%= field_id %>_input">
+  <%= label_tag field_id, label, class: "label" %>
+  <%= render partial: "kubik/interface_elements/tags_field_control",
+             locals: local_assigns.slice(
+               :field_name, :field_id, :value, :label, :hint, :suggestions_url, :suggestions,
+               :multiselect, :value_format, :allow_create, :min_length, :separator, :input_html,
+               :query_input_id
+             ).merge(
+               field_name: field_name,
+               field_id: field_id,
+               value: value,
+               label: local_assigns.fetch(:label, "Tags"),
+               multiselect: local_assigns.fetch(:multiselect, true),
+               value_format: local_assigns.fetch(:value_format, :string),
+               allow_create: local_assigns.fetch(:allow_create, true),
+               min_length: local_assigns.fetch(:min_length, 1),
+               separator: local_assigns.fetch(:separator, ", "),
+               suggestions: local_assigns.fetch(:suggestions, []),
+               query_input_id: local_assigns[:query_input_id] || field_id
+             ) %>
+  <% if local_assigns[:hint].present? %>
+    <p class="inline-hints"><%= hint %></p>
+  <% end %>
+</li>

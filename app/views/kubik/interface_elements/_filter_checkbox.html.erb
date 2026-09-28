@@ -1,0 +1,8 @@
+<%# locals: name, label, checked:, autosubmit: true %>
+<% submit_action = local_assigns.fetch(:autosubmit, true) ? "this.form.requestSubmit()" : nil %>
+<div class="kubik-interface-filters__field kubik-interface-filters__field--checkbox">
+  <label class="kubik-interface-filters__checkbox-label">
+    <%= check_box_tag name, "1", checked, onchange: submit_action, class: "kubik-interface-filters__checkbox-input" %>
+    <span><%= label %></span>
+  </label>
+</div>
