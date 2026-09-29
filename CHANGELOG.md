@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.2.11] - 2026-09-28
+
+### Added
+
+- Social link preview cards for admin (`render_kubik_social_share_preview`, `render_kubik_social_share_previews`) with styles.
+- `KubikInterfaceElements::FiltersHelper` (filter bar partials + plain HTML fallbacks).
+
 ## [0.2.10] - 2026-09-28
 
 ### Changed

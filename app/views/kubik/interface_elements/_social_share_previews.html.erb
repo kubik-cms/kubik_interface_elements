@@ -1,0 +1,11 @@
+<%# locals: meta (Hash), platforms (array of symbols), html_class: optional %>
+<% platforms = Array(local_assigns.fetch(:platforms, KubikInterfaceElements::SocialSharePreviewHelper::DEFAULT_PLATFORMS)) %>
+<div class="<%= ["kubik-social-share-previews", local_assigns[:html_class]].compact.join(" ") %>">
+  <% platforms.each do |platform| %>
+    <% heading = KubikInterfaceElements::SocialSharePreviewHelper::PLATFORM_HEADINGS.fetch(platform.to_sym, platform.to_s) %>
+    <div class="kubik-social-share-previews__group">
+      <h4 class="kubik-social-share-previews__heading"><%= heading %></h4>
+      <%= render partial: "kubik/interface_elements/social_share_preview", locals: { meta: meta, platform: platform } %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,61 @@
+.kubik-social-share-preview {
+  border: 1px solid #dadde1;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 500px;
+  margin-bottom: 1rem;
+  background: #fff;
+
+  &__image img {
+    display: block;
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+  }
+
+  &__body {
+    padding: 12px;
+  }
+
+  &__domain {
+    color: #65676b;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  &__description {
+    color: #65676b;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  &--x {
+    border-color: #cfd9de;
+
+    .kubik-social-share-preview__title {
+      font-size: 15px;
+    }
+  }
+
+  &--linkedin {
+    border-color: #e0e0e0;
+  }
+}
+
+.kubik-social-share-previews {
+  &__heading {
+    margin: 0 0 0.5rem;
+  }
+
+  &__group {
+    margin-bottom: 1rem;
+  }
+}

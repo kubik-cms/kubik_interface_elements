@@ -8,6 +8,8 @@ require_relative "kubik_interface_elements/offcanvas_helper"
 require_relative "kubik_interface_elements/panel_audit_table_renderer"
 require_relative "kubik_interface_elements/panel_helper"
 require_relative "kubik_interface_elements/filters_helper"
+require_relative "kubik_interface_elements/social_share_preview_renderer"
+require_relative "kubik_interface_elements/social_share_preview_helper"
 
 module KubikInterfaceElements
   module Rails
@@ -40,6 +42,7 @@ module KubikInterfaceElements
           include KubikInterfaceElements::FiltersHelper
           include KubikInterfaceElements::OffcanvasHelper
           include KubikInterfaceElements::PanelHelper
+          include KubikInterfaceElements::SocialSharePreviewHelper
         end
       end
     end
