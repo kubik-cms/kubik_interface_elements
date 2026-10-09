@@ -217,8 +217,10 @@ class offcanvas_controller_default extends Controller {
     }
   }
   openOffcanvas(event) {
+    event.preventDefault();
     const target = event.currentTarget;
-    const src = target.getAttribute("src") || target.getAttribute("href") || target.dataset.kubikOffcanvasSrc || "";
+    const href = target.getAttribute("href");
+    const src = target.getAttribute("src") || target.dataset.kubikOffcanvasSrc || (href && href !== "#" ? href : "") || "";
     this.offcanvasPositionValue = target.dataset.kubikOffcanvasPosition || this.offcanvasPositionValue;
     this.offcanvasHeaderValue = target.dataset.kubikOffcanvasHeaderText || "";
     this.offcanvasSrcValue = src;
@@ -696,7 +698,11 @@ const registerInterfaceElementControllers = function() {
   document.documentElement.setAttribute("data-controller", [...controllers].join(" "));
 };
 const modalInit = function() {
-  document.addEventListener("DOMContentLoaded", registerInterfaceElementControllers);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", registerInterfaceElementControllers);
+  } else {
+    registerInterfaceElementControllers();
+  }
 };
 const offcanvasInit = modalInit;
-export { modal_controller_default as ModalController, offcanvas_controller_default as OffcanvasController, token_input_controller_default as TokenInputController, typeahead_controller_default as TypeaheadController, modalInit, offcanvasInit };
+export { modal_controller_default as ModalController, offcanvas_controller_default as OffcanvasController, token_input_controller_default as TokenInputController, typeahead_controller_default as TypeaheadController, registerInterfaceElementControllers, modalInit, offcanvasInit };

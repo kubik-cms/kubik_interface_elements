@@ -1,0 +1,7 @@
+<div class="kubik-media-progress" role="group" aria-label="Media processing progress">
+  <div class="kubik-media-progress__bars" aria-hidden="true">
+    <% bars.each do |bar| %>
+      <span class="kubik-media-progress__bar<%= " is-complete" if bar[:complete] %><%= " is-active" if bar[:active] %>"></span>
+    <% end %>
+  </div>
+</div>

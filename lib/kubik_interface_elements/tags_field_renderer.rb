@@ -21,23 +21,17 @@ module KubikInterfaceElements
     end
 
     def render_control
-      @view.render(
-        partial: "kubik/interface_elements/tags_field_control",
-        locals: @options
-      )
+      @view.render Kubik::Tags::FieldControlComponent.new(**@options)
     end
 
     def render_full
-      @view.render(
-        partial: "kubik/interface_elements/tags_field",
-        locals: @options
-      )
+      @view.render Kubik::Tags::FieldComponent.new(**@options)
     end
 
     private
 
     def normalize_options(options)
-      normalized = {
+      {
         field_name: options[:field_name],
         field_id: options[:field_id],
         value: options[:value],
@@ -54,8 +48,7 @@ module KubikInterfaceElements
         query_input_id: options[:query_input_id] || options[:field_id],
         autosubmit: options.fetch(:autosubmit, false),
         autosubmit_debounce_ms: options.fetch(:autosubmit_debounce_ms, 0)
-      }
-      normalized.compact
+      }.compact
     end
   end
 end

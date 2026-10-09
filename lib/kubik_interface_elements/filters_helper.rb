@@ -3,12 +3,12 @@
 module KubikInterfaceElements
   module FiltersHelper
     def kubik_interface_filters_available?
-      lookup_context.template_exists?("kubik/interface_elements/filter_text", [], true)
+      true
     end
 
     def render_kubik_filter_text(**options)
       if kubik_interface_filters_available?
-        render partial: "kubik/interface_elements/filter_text", locals: options
+        render Kubik::Filters::TextComponent.new(**options.slice(:name, :label, :value, :autosubmit, :debounce_ms))
       else
         kubik_filter_text_fallback(**options.slice(:name, :label, :value))
       end
@@ -16,7 +16,7 @@ module KubikInterfaceElements
 
     def render_kubik_filter_select(**options)
       if kubik_interface_filters_available?
-        render partial: "kubik/interface_elements/filter_select", locals: options
+        render Kubik::Filters::SelectComponent.new(**options.slice(:name, :label, :options, :selected, :autosubmit))
       else
         kubik_filter_select_fallback(**options.slice(:name, :label, :options, :selected, :autosubmit))
       end
@@ -24,7 +24,7 @@ module KubikInterfaceElements
 
     def render_kubik_filter_date(**options)
       if kubik_interface_filters_available?
-        render partial: "kubik/interface_elements/filter_date", locals: options
+        render Kubik::Filters::DateComponent.new(**options.slice(:name, :label, :value, :autosubmit))
       else
         kubik_filter_date_fallback(**options.slice(:name, :label, :value, :autosubmit))
       end
@@ -32,7 +32,7 @@ module KubikInterfaceElements
 
     def render_kubik_filter_checkbox(**options)
       if kubik_interface_filters_available?
-        render partial: "kubik/interface_elements/filter_checkbox", locals: options
+        render Kubik::Filters::CheckboxComponent.new(**options.slice(:name, :label, :checked, :autosubmit))
       else
         kubik_filter_checkbox_fallback(**options.slice(:name, :label, :checked, :autosubmit))
       end
@@ -40,7 +40,7 @@ module KubikInterfaceElements
 
     def render_kubik_filter_toggle_group(**options)
       if kubik_interface_filters_available?
-        render partial: "kubik/interface_elements/filter_toggle_group", locals: options
+        render Kubik::Filters::ToggleGroupComponent.new(**options.slice(:name, :options, :selected, :autosubmit, :aria_label))
       else
         kubik_filter_toggle_group_fallback(**options)
       end
@@ -48,7 +48,10 @@ module KubikInterfaceElements
 
     def render_kubik_filter_tags(**options)
       if kubik_interface_filters_available?
-        render partial: "kubik/interface_elements/filter_tags", locals: options
+        render Kubik::Filters::TagsComponent.new(**options.slice(
+          :name, :match_name, :label, :selected_tags, :match, :suggestions_url,
+          :autosubmit, :autosubmit_debounce_ms, :untagged_name, :untagged_checked, :untagged_label
+        ))
       else
         kubik_filter_tags_fallback(**options)
       end
@@ -56,18 +59,19 @@ module KubikInterfaceElements
 
     def render_kubik_filter_bar(**options)
       if kubik_interface_filters_available?
-        render partial: "kubik/interface_elements/filter_bar", locals: options
+        render Kubik::Filters::BarComponent.new(**options.slice(
+          :url, :clear_url, :turbo_frame, :clear_turbo_frame, :modal, :compact, :fields_html, :tags_html
+        ))
       else
         kubik_filter_bar_fallback(**options)
       end
     end
 
     def render_kubik_tag_list(**options)
-      if lookup_context.template_exists?("kubik/interface_elements/tag_list", [], true)
-        render partial: "kubik/interface_elements/tag_list", locals: options
-      else
-        kubik_tag_list_fallback(**options.slice(:tags, :limit, :wrapper_class))
-      end
+      component = Kubik::Tags::ListComponent.new(**options.slice(:tags, :limit, :wrapper_class))
+      return "".html_safe unless component.render?
+
+      render component
     end
 
     private
@@ -141,26 +145,6 @@ module KubikInterfaceElements
             tags_html
           ].compact
         )
-      end
-    end
-
-    def kubik_tag_list_fallback(tags:, limit: nil, wrapper_class: nil)
-      tag_array = Array(tags).compact
-      return "".html_safe if tag_array.blank?
-
-      limit = limit.presence
-      if limit && tag_array.size > limit
-        visible_tags = tag_array.last(limit)
-        extra_count = tag_array.size - limit
-      else
-        visible_tags = tag_array
-        extra_count = 0
-      end
-
-      content_tag(:div, class: wrapper_class.presence) do
-        parts = visible_tags.map { |tag| content_tag(:span, tag) }
-        parts << content_tag(:span, "+#{extra_count} more") if extra_count.positive?
-        safe_join(parts)
       end
     end
   end

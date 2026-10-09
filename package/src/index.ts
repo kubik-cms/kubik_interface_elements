@@ -4,6 +4,7 @@ import TypeaheadController from './controllers/typeahead_controller'
 import TokenInputController from './controllers/token_input_controller'
 import DebouncedFormSubmitController from './controllers/debounced_form_submit_controller'
 import FilterTagsSectionController from './controllers/filter_tags_section_controller'
+import TabbedPanelsController from './controllers/tabbed_panels_controller'
 import {
   KUBIK_INTERFACE_STIMULUS_MANIFEST,
   registerKubikInterfaceStimulusControllers
@@ -20,7 +21,11 @@ const registerInterfaceElementControllers = function (): void {
 }
 
 const modalInit = function (): void {
-  document.addEventListener('DOMContentLoaded', registerInterfaceElementControllers)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', registerInterfaceElementControllers)
+  } else {
+    registerInterfaceElementControllers()
+  }
 }
 
 const offcanvasInit = modalInit
@@ -28,12 +33,14 @@ const offcanvasInit = modalInit
 export {
   ModalController,
   OffcanvasController,
+  registerInterfaceElementControllers,
   modalInit,
   offcanvasInit,
   TypeaheadController,
   TokenInputController,
   DebouncedFormSubmitController,
   FilterTagsSectionController,
+  TabbedPanelsController,
   KUBIK_INTERFACE_STIMULUS_MANIFEST,
   registerKubikInterfaceStimulusControllers
 }

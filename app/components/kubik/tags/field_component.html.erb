@@ -1,0 +1,7 @@
+<li class="string input optional stringish kubik-interface-tags-field" id="<%= @field_id %>_input">
+  <%= label_tag @field_id, @label, class: "label" %>
+  <%= render Kubik::Tags::FieldControlComponent.new(**control_locals) %>
+  <% if @hint.present? %>
+    <p class="inline-hints"><%= @hint %></p>
+  <% end %>
+</li>

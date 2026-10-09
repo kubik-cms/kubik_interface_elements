@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "view_component"
 require_relative "kubik_interface_elements/version"
 require_relative "kubik_interface_elements/tag_field_value"
 require_relative "kubik_interface_elements/tags_field_renderer"
@@ -16,7 +17,14 @@ module KubikInterfaceElements
     class Engine < ::Rails::Engine
       isolate_namespace KubikInterfaceElements
 
-      config.assets.precompile += %w( kubik_interface_elements.js )
+      config.autoload_paths << root.join("app/components")
+      config.eager_load_paths << root.join("app/components")
+
+      config.assets.precompile += %w[
+        kubik_interface_elements.js
+        kubik_interface_elements/interface_elements.es.js
+        kubik_interface_elements/components.css
+      ]
 
       initializer :kubik_interface_elements_active_admin do
         ActiveSupport.on_load(:active_admin) do

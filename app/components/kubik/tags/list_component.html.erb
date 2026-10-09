@@ -1,0 +1,8 @@
+<div class="<%= list_classes %>">
+  <% visible_tags.each do |tag| %>
+    <span class="kubik-interface-tag-list__chip"><%= tag %></span>
+  <% end %>
+  <% if extra_count.positive? %>
+    <span class="kubik-interface-tag-list__more">+<%= extra_count %> more</span>
+  <% end %>
+</div>

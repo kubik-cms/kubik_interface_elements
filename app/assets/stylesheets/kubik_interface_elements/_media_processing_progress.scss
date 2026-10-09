@@ -1,0 +1,71 @@
+.kubik-media-progress {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 0;
+
+  &__bars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1px;
+  }
+
+  &__bar {
+    height: 2px;
+    width: 20px;
+    background-color: var(--kubik-interface-color-grey-300, #d1d5db);
+    border-radius: 1px;
+    transition: background-color 0.2s ease;
+
+    &.is-complete {
+      background-color: var(--kubik-interface-color-notice, #22c55e);
+    }
+
+    &.is-active {
+      background-color: var(--kubik-interface-color-brand-400, #60a5fa);
+      animation: kubik-media-progress-pulse 1.4s ease-in-out infinite;
+    }
+  }
+
+  &__dot {
+    position: absolute;
+    top: 0.35rem;
+    left: 0.35rem;
+    z-index: 2;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: 2px solid var(--kubik-interface-color-white, #fff);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    pointer-events: none;
+
+    &--pending {
+      background-color: var(--kubik-interface-color-grey-400, #9ca3af);
+    }
+
+    &--processing {
+      background-color: var(--kubik-interface-color-brand-500, #3b82f6);
+      animation: kubik-media-progress-pulse 1.4s ease-in-out infinite;
+    }
+
+    &--attention {
+      background-color: var(--kubik-interface-color-warning, #f59e0b);
+    }
+
+    &--complete {
+      background-color: var(--kubik-interface-color-notice, #22c55e);
+    }
+  }
+}
+
+@keyframes kubik-media-progress-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}

@@ -1,30 +1,25 @@
-<%# locals: url:, header:, label: nil, position: "end", html_class: "button", pending: false, icon: nil, tone: "grey" %>
+<%# locals: url:, header:, label: nil, position: "end", html_class: nil, pending: false, icon: nil, tone: "grey" %>
 <%
-  label_text = local_assigns[:label].presence || header
+  label_text = (local_assigns[:label].presence || header).to_s.strip
+  header_text = header.to_s.strip
   position = local_assigns.fetch(:position, "end")
   tone = local_assigns.fetch(:tone, "grey")
-  icon_name = local_assigns[:icon]
+  icon_name = local_assigns[:icon].to_s.strip.presence
 %>
-<%= tag.div(
-      src: url,
-      class: [html_class, ("kubik-offcanvas-open--pending" if pending)].compact.join(" "),
-      role: "button",
-      tabindex: 0,
+<%= tag.a(
+      href: url,
+      class: [html_class.presence, ("kubik-offcanvas-open--pending" if pending)].compact.join(" "),
       title: label_text,
       aria: { label: label_text },
       data: {
-        kubik_offcanvas_header_text: header,
+        kubik_offcanvas_header_text: header_text,
         kubik_offcanvas_position: position,
         kubik_offcanvas_tone: tone,
+        kubik_offcanvas_src: url,
+        turbo: false,
         action: "click->kubik-offcanvas#openOffcanvas"
       }
-    ) do %>
-  <% if pending %>
-    <span class="kubik-offcanvas-open__badge" aria-hidden="true"></span>
-  <% end %>
-  <% if icon_name.present? %>
-    <span class="material-symbols-outlined material-icon" aria-hidden="true"><%= icon_name %></span>
-  <% else %>
-    <%= label_text %>
-  <% end %>
+    ) do -%>
+<% if pending -%><span class="kubik-offcanvas-open__badge" aria-hidden="true"></span><% end -%>
+<% if icon_name.present? -%><span class="material-symbols-outlined material-icon" aria-hidden="true"><%= icon_name %></span><% else -%><%= label_text %><% end -%>
 <% end %>

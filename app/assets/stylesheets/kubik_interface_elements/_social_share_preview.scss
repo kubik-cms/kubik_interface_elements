@@ -6,11 +6,16 @@
   margin-bottom: 1rem;
   background: #fff;
 
-  &__image img {
-    display: block;
-    width: 100%;
-    max-height: 260px;
-    object-fit: cover;
+  &__image {
+    background: #f0f2f5;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   &__body {
@@ -37,16 +42,99 @@
     line-height: 1.4;
   }
 
-  &--x {
-    border-color: #cfd9de;
+  &--facebook {
+    max-width: 500px;
 
-    .kubik-social-share-preview__title {
-      font-size: 15px;
+    .kubik-social-share-preview__image {
+      aspect-ratio: 1200 / 630;
+    }
+
+    .kubik-social-share-preview__body {
+      background: #f2f3f5;
     }
   }
 
   &--linkedin {
+    max-width: 552px;
     border-color: #e0e0e0;
+
+    .kubik-social-share-preview__image {
+      aspect-ratio: 1200 / 627;
+    }
+
+    .kubik-social-share-preview__title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .kubik-social-share-preview__description {
+      font-size: 12px;
+    }
+  }
+
+  &--x {
+    border-color: #cfd9de;
+    border-radius: 16px;
+    max-width: 504px;
+
+    .kubik-social-share-preview__title {
+      font-size: 15px;
+      font-weight: 400;
+      color: #0f1419;
+    }
+
+    .kubik-social-share-preview__description {
+      font-size: 15px;
+      color: #536471;
+      margin-bottom: 4px;
+    }
+
+    .kubik-social-share-preview__domain {
+      text-transform: none;
+      color: #536471;
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+
+    &.kubik-social-share-preview--summary_large_image {
+      .kubik-social-share-preview__image {
+        aspect-ratio: 1200 / 675;
+      }
+    }
+
+    &.kubik-social-share-preview--summary.kubik-social-share-preview--has-image {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+
+      .kubik-social-share-preview__image {
+        flex: 0 0 130px;
+        width: 130px;
+        aspect-ratio: 1 / 1;
+        border-right: 1px solid #cfd9de;
+      }
+
+      .kubik-social-share-preview__body {
+        flex: 1;
+        min-width: 0;
+        padding: 10px 12px;
+      }
+
+      .kubik-social-share-preview__title {
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .kubik-social-share-preview__description {
+        font-size: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
   }
 }
 

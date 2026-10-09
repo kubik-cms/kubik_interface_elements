@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+
+- `kubik-interface-tabbed` Stimulus controller and token-based tab switcher styles; pane errors via `kubik-interface-tabbed__message--error`.
+
 ## [0.2.11] - 2026-09-28
 
 ### Added

@@ -177,6 +177,21 @@
     margin-right: 0;
   }
 
+  // Active Admin show: Details + Status (etc.) side by side. Flex only here — not on .tab-content.
+  .kubik-admin-show-panels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+
+    > .panel {
+      flex: 1 1 18rem;
+      min-width: min(100%, 18rem);
+      margin: 0;
+      box-sizing: border-box;
+    }
+  }
+
   #main_content_wrapper .kubik-admin-fieldset__body .attributes_table,
   .without_sidebar #main_content_wrapper .kubik-admin-fieldset__body .attributes_table {
     margin-left: 0;

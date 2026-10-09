@@ -79,6 +79,15 @@ export default class extends Controller {
 
   handleFrameLoad = (): void => {
     this.clearLoadingState()
+    if (!this.hasOffcanvasFrameTarget) return
+
+    const frame = this.offcanvasFrameTarget
+    if (
+      frame.hasAttribute('data-kubik-offcanvas-close') ||
+      frame.querySelector('[data-kubik-offcanvas-close]')
+    ) {
+      this.closeOffcanvas()
+    }
   }
 
   handleFrameMissing = (): void => {
@@ -138,11 +147,14 @@ export default class extends Controller {
   }
 
   openOffcanvas (event: Event): void {
+    event.preventDefault()
+
     const target = event.currentTarget as HTMLElement
+    const href = target.getAttribute('href')
     const src =
       target.getAttribute('src') ||
-      target.getAttribute('href') ||
       target.dataset.kubikOffcanvasSrc ||
+      (href && href !== '#' ? href : '') ||
       ''
 
     this.offcanvasPositionValue =

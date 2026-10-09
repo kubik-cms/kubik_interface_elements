@@ -6,6 +6,7 @@ import TypeaheadController from './controllers/typeahead_controller'
 import TokenInputController from './controllers/token_input_controller'
 import DebouncedFormSubmitController from './controllers/debounced_form_submit_controller'
 import FilterTagsSectionController from './controllers/filter_tags_section_controller'
+import TabbedPanelsController from './controllers/tabbed_panels_controller'
 
 /** Stimulus identifiers registered by registerKubikInterfaceStimulusControllers */
 export const KUBIK_INTERFACE_STIMULUS_MANIFEST = [
@@ -14,7 +15,8 @@ export const KUBIK_INTERFACE_STIMULUS_MANIFEST = [
   'kubik-typeahead',
   'kubik-token-input',
   'kubik-debounced-form-submit',
-  'kubik-filter-tags-section'
+  'kubik-filter-tags-section',
+  'kubik-interface-tabbed'
 ] as const
 
 export function registerKubikInterfaceStimulusControllers(application: Application): void {
@@ -24,4 +26,5 @@ export function registerKubikInterfaceStimulusControllers(application: Applicati
   application.register('kubik-token-input', TokenInputController)
   application.register('kubik-debounced-form-submit', DebouncedFormSubmitController)
   application.register('kubik-filter-tags-section', FilterTagsSectionController)
+  application.register('kubik-interface-tabbed', TabbedPanelsController)
 }

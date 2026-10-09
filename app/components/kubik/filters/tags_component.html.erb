@@ -1,0 +1,45 @@
+<%= content_tag(:div, class: field_classes, **field_attrs) do %>
+  <%= label_tag field_id, @label %>
+  <div class="kubik-interface-filters__tags-controls<%= with_untagged? ? " kubik-interface-filters__tags-controls--with-untagged" : "" %>">
+    <div class="kubik-interface-filters__tags-input-group"<%= with_untagged? ? ' data-kubik-filter-tags-section-target="section"'.html_safe : "" %>>
+      <%= render Kubik::Tags::FieldControlComponent.new(
+            field_name: field_name,
+            field_id: field_id,
+            value: tag_value,
+            label: @label,
+            suggestions_url: @suggestions_url,
+            suggestions: [],
+            multiselect: true,
+            value_format: :array,
+            allow_create: true,
+            min_length: 1,
+            separator: ", ",
+            input_html: { class: "kubik-interface-filters__text-input" },
+            query_input_id: "#{field_id}_query",
+            autosubmit: @autosubmit,
+            autosubmit_debounce_ms: @autosubmit_debounce_ms
+          ) %>
+      <% if @match_name.present? %>
+        <%= render Kubik::Filters::TagMatchComponent.new(
+              name: @match_name,
+              selected: @match,
+              autosubmit: @autosubmit
+            ) %>
+      <% end %>
+    </div>
+    <% if with_untagged? %>
+      <label class="kubik-interface-filters__checkbox-label kubik-interface-filters__untagged-toggle">
+        <%= check_box_tag @untagged_name,
+                          "1",
+                          @untagged_checked,
+                          class: "kubik-interface-filters__checkbox-input",
+                          data: {
+                            kubik_filter_tags_section_target: "untagged",
+                            action: "change->kubik-filter-tags-section#syncDisabled"
+                          },
+                          onchange: untagged_submit %>
+        <span><%= @untagged_label %></span>
+      </label>
+    <% end %>
+  </div>
+<% end %>

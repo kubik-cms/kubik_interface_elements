@@ -11,14 +11,12 @@ module KubikInterfaceElements
     }.freeze
 
     def kubik_social_share_previews_available?
-      lookup_context.template_exists?("kubik/interface_elements/social_share_preview", [], true)
+      true
     end
 
-    # meta: resolved OG/Twitter fields (see doc/social_share_preview_elements.md)
     def render_kubik_social_share_previews(meta:, platforms: DEFAULT_PLATFORMS, html_class: nil)
       if kubik_social_share_previews_available?
-        render partial: "kubik/interface_elements/social_share_previews",
-               locals: { meta: meta, platforms: platforms, html_class: html_class }
+        render Kubik::SocialShare::PreviewsComponent.new(meta: meta, platforms: platforms, html_class: html_class)
       else
         render_kubik_social_share_previews_fallback(meta: meta, platforms: platforms)
       end

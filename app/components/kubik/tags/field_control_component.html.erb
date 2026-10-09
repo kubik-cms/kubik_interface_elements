@@ -1,0 +1,48 @@
+<div class="kubik-interface-token-input"
+     data-controller="kubik-token-input"
+     data-kubik-token-input-multiselect-value="<%= @multiselect %>"
+     data-kubik-token-input-value-format-value="<%= @value_format %>"
+     data-kubik-token-input-separator-value="<%= @separator %>"
+     data-kubik-token-input-allow-create-value="<%= @allow_create %>"
+     data-kubik-token-input-autosubmit-value="<%= @autosubmit %>"
+     data-kubik-token-input-autosubmit-debounce-ms-value="<%= @autosubmit_debounce_ms %>"
+     data-action="kubik-typeahead:select->kubik-token-input#addFromTypeahead">
+  <% if @value_format == "array" %>
+    <div data-kubik-token-input-target="hiddenArrayContainer"
+         data-field-name="<%= @field_name %>[]"
+         class="kubik-interface-token-input__hidden-array"></div>
+  <% else %>
+    <%= hidden_field_tag @field_name, @value, data: { kubik_token_input_target: "hiddenInput" } %>
+  <% end %>
+
+  <%= text_field_tag nil,
+        @value,
+        id: "#{@field_id}_fallback",
+        class: "kubik-interface-tags-field__input kubik-interface-token-input__fallback",
+        data: { kubik_token_input_target: "fallbackInput" } %>
+
+  <div class="kubik-interface-typeahead"
+       data-controller="kubik-typeahead"
+       data-kubik-token-input-typeahead-outlet
+       <% if @suggestions_url.present? %>
+       data-kubik-typeahead-src-value="<%= @suggestions_url %>"
+       <% end %>
+       data-kubik-typeahead-options-value="<%= suggestions_payload %>"
+       data-kubik-typeahead-min-length-value="<%= @min_length %>"
+       data-kubik-typeahead-active-result-class="kubik-interface-typeahead__option--active"
+       data-kubik-typeahead-open-class="kubik-interface-typeahead--open">
+    <input type="text"
+           autocomplete="off"
+           id="<%= @query_input_id %>"
+           <% if query_classes.present? %>class="<%= query_classes %>"<% end %>
+           data-kubik-typeahead-target="input"
+           data-kubik-token-input-target="queryInput"
+           data-action="input->kubik-typeahead#onInput focus->kubik-typeahead#onFocus blur->kubik-typeahead#onBlur keydown->kubik-typeahead#keydown keydown->kubik-token-input#queryKeydown"
+           <%= tag.attributes(input_html_opts.except(:class)) %> />
+    <ul class="kubik-interface-typeahead__results"
+        data-kubik-typeahead-target="resultsList"
+        role="listbox"></ul>
+  </div>
+
+  <div data-kubik-token-input-target="chipList" class="kubik-interface-token-input__chips"></div>
+</div>

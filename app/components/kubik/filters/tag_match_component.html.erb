@@ -1,0 +1,7 @@
+<%= render Kubik::Filters::ToggleGroupComponent.new(
+      name: @name,
+      selected: @selected,
+      autosubmit: @autosubmit,
+      aria_label: "Tag match",
+      options: [["Any", "or"], ["All", "and"]]
+    ) %>

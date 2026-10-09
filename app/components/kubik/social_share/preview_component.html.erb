@@ -1,0 +1,46 @@
+<% case @platform %>
+<% when :facebook %>
+  <div class="kubik-social-share-preview kubik-social-share-preview--facebook">
+    <% if @meta[:og_image].present? %>
+      <div class="kubik-social-share-preview__image">
+        <%= image_tag @meta[:og_image], alt: "" %>
+      </div>
+    <% end %>
+    <div class="kubik-social-share-preview__body">
+      <div class="kubik-social-share-preview__domain"><%= domain %></div>
+      <div class="kubik-social-share-preview__title"><%= @meta[:og_title] %></div>
+      <div class="kubik-social-share-preview__description"><%= @meta[:og_description] %></div>
+    </div>
+  </div>
+<% when :x %>
+  <div class="<%= x_preview_classes %>">
+    <% if @meta[:twitter_image].present? %>
+      <div class="kubik-social-share-preview__image">
+        <%= image_tag @meta[:twitter_image], alt: "" %>
+      </div>
+    <% end %>
+    <div class="kubik-social-share-preview__body">
+      <div class="kubik-social-share-preview__title"><%= @meta[:twitter_title] %></div>
+      <div class="kubik-social-share-preview__description"><%= @meta[:twitter_description] %></div>
+      <div class="kubik-social-share-preview__domain"><%= domain %></div>
+    </div>
+  </div>
+<% when :linkedin %>
+  <div class="kubik-social-share-preview kubik-social-share-preview--linkedin">
+    <% if @meta[:og_image].present? %>
+      <div class="kubik-social-share-preview__image">
+        <%= image_tag @meta[:og_image], alt: "" %>
+      </div>
+    <% end %>
+    <div class="kubik-social-share-preview__body">
+      <div class="kubik-social-share-preview__title"><%= @meta[:og_title] %></div>
+      <div class="kubik-social-share-preview__description"><%= @meta[:og_description] %></div>
+    </div>
+  </div>
+<% else %>
+  <div class="kubik-social-share-preview">
+    <div class="kubik-social-share-preview__body">
+      <div class="kubik-social-share-preview__title"><%= @meta[:og_title] %></div>
+    </div>
+  </div>
+<% end %>

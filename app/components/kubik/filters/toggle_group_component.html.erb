@@ -1,0 +1,8 @@
+<div class="kubik-interface-toggle-group kubik-interface-filters__toggle-group" role="radiogroup" aria-label="<%= @aria_label %>">
+  <% @options.each do |option_label, value| %>
+    <label class="kubik-interface-toggle-group__option">
+      <%= radio_button_tag @name, value, @selected == value.to_s, onchange: submit_action, class: "kubik-interface-toggle-group__input" %>
+      <span class="kubik-interface-toggle-group__label"><%= option_label %></span>
+    </label>
+  <% end %>
+</div>

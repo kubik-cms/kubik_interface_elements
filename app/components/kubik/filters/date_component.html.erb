@@ -1,0 +1,7 @@
+<div class="kubik-interface-filters__field">
+  <%= label_tag @name, @label %>
+  <%= date_field_tag @name,
+        @value,
+        class: "kubik-interface-filters__date-input",
+        onchange: onchange_handler %>
+</div>

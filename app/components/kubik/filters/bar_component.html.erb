@@ -1,0 +1,24 @@
+<%= form_with url: @url,
+              method: :get,
+              html: {
+                class: filter_classes,
+                data: { turbo: true, turbo_frame: @turbo_frame }
+              } do %>
+  <% if @modal %>
+    <%= hidden_field_tag :modal, "true" %>
+  <% end %>
+  <div class="kubik-interface-filters__toolbar">
+    <%= link_to "Clear filters",
+          @clear_url,
+          class: "kubik-interface-filters__clear",
+          data: clear_link_data %>
+  </div>
+  <div class="kubik-interface-filters__fields">
+    <%= @fields_html %>
+  </div>
+  <% if @tags_html.present? %>
+    <div class="kubik-interface-filters__tags-row">
+      <%= @tags_html %>
+    </div>
+  <% end %>
+<% end %>
