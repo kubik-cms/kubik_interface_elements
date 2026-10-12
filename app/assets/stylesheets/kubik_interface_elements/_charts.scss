@@ -1,0 +1,102 @@
+.kubik-interface-chart {
+  color: var(--kubik-chart-text);
+
+  &__title {
+    margin: 0 0 var(--kubik-interface-space-75, 0.75rem);
+    font-size: var(--kubik-interface-base-font-size);
+    font-weight: 600;
+  }
+
+  &__progress-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem 1rem;
+    margin-bottom: var(--kubik-interface-space-50, 0.5rem);
+  }
+
+  &__progress-caption {
+    font-weight: 600;
+  }
+
+  &__progress-amount {
+    color: var(--kubik-chart-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__progress-track {
+    height: 0.65rem;
+    border-radius: var(--kubik-interface-radius-100, 0.25rem);
+    background: var(--kubik-chart-track-bg);
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.25s ease;
+    background: var(--kubik-chart-fill-ok);
+
+    &--warning {
+      background: var(--kubik-chart-fill-warning);
+    }
+
+    &--danger {
+      background: var(--kubik-chart-fill-danger);
+    }
+  }
+
+  &__progress-meta {
+    margin: var(--kubik-interface-space-50, 0.5rem) 0 0;
+    font-size: 0.875rem;
+    color: var(--kubik-chart-muted);
+  }
+
+  &__progress-percent {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--kubik-chart-text);
+
+    &--primary {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__canvas-wrap {
+    position: relative;
+    min-height: 14rem;
+    height: 14rem;
+    width: 100%;
+  }
+
+  &__canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: var(--kubik-interface-space-75, 0.75rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    color: var(--kubik-chart-muted);
+  }
+
+  &__legend-swatch {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+}

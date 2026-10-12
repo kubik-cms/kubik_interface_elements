@@ -1,0 +1,21 @@
+<div class="kubik-interface-chart kubik-interface-chart__progress" role="group" aria-label="<%= caption %>">
+  <div class="kubik-interface-chart__progress-header">
+    <span class="kubik-interface-chart__progress-caption"><%= caption %></span>
+    <% if show_amounts? %>
+      <span class="kubik-interface-chart__progress-amount"><%= amount_text %></span>
+    <% else %>
+      <span class="kubik-interface-chart__progress-percent kubik-interface-chart__progress-percent--primary"><%= percentage %>%</span>
+    <% end %>
+  </div>
+  <div class="kubik-interface-chart__progress-track" aria-hidden="true">
+    <div class="kubik-interface-chart__progress-fill kubik-interface-chart__progress-fill--<%= tone %>"
+         style="width: <%= percentage %>%"></div>
+  </div>
+  <% unless show_amounts? %>
+    <p class="kubik-interface-chart__progress-meta">of <%= allowance_label %></p>
+  <% else %>
+    <p class="kubik-interface-chart__progress-meta">
+      <span class="kubik-interface-chart__progress-percent"><%= percentage %>%</span> of allowance used
+    </p>
+  <% end %>
+</div>

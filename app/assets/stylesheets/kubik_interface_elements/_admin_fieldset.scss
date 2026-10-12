@@ -170,6 +170,10 @@
     > .kubik-admin-fieldset + .kubik-admin-fieldset {
       margin-top: 0.25rem;
     }
+
+    fieldset.inputs {
+      margin: 0;
+    }
   }
 
   #active_admin_content ul.nav-tabs {

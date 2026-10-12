@@ -5,6 +5,7 @@ import TokenInputController from './controllers/token_input_controller'
 import DebouncedFormSubmitController from './controllers/debounced_form_submit_controller'
 import FilterTagsSectionController from './controllers/filter_tags_section_controller'
 import TabbedPanelsController from './controllers/tabbed_panels_controller'
+import ChartController from './controllers/chart_controller'
 import {
   KUBIK_INTERFACE_STIMULUS_MANIFEST,
   registerKubikInterfaceStimulusControllers
@@ -41,6 +42,7 @@ export {
   DebouncedFormSubmitController,
   FilterTagsSectionController,
   TabbedPanelsController,
+  ChartController,
   KUBIK_INTERFACE_STIMULUS_MANIFEST,
   registerKubikInterfaceStimulusControllers
 }

@@ -1,0 +1,12 @@
+<div class="<%= root_classes %>"
+     data-controller="kubik-chart"
+     data-kubik-chart-config-value="<%= chart_config_json %>">
+  <% if @title.present? %>
+    <h4 class="kubik-interface-chart__title"><%= @title %></h4>
+  <% end %>
+  <div class="kubik-interface-chart__canvas-wrap">
+    <canvas class="kubik-interface-chart__canvas" data-kubik-chart-target="canvas" role="img"
+            aria-label="<%= @title.presence || "Usage chart" %>"></canvas>
+  </div>
+  <ul class="kubik-interface-chart__legend" data-kubik-chart-target="legend" aria-hidden="true"></ul>
+</div>

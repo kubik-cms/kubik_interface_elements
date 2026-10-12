@@ -50,3 +50,19 @@
   --kubik-interface-tabbed-tab-active-bg: var(--kubik-interface-color-brand-400);
   --kubik-interface-tabbed-tab-active-text: var(--kubik-interface-color-white);
 }
+
+.kubik-interface-chart {
+  --kubik-chart-series-1: var(--kubik-interface-color-brand-400);
+  --kubik-chart-series-2: var(--kubik-interface-color-grey-600);
+  --kubik-chart-series-3: var(--kubik-interface-color-notice, #22c55e);
+  --kubik-chart-series-4: var(--kubik-interface-color-brand-300);
+  --kubik-chart-series-5: var(--kubik-interface-color-grey-500);
+  --kubik-chart-series-6: var(--kubik-interface-color-brand-600);
+  --kubik-chart-track-bg: var(--kubik-interface-color-grey-200);
+  --kubik-chart-fill-ok: var(--kubik-interface-color-brand-400);
+  --kubik-chart-fill-warning: var(--kubik-interface-color-warning, #f59e0b);
+  --kubik-chart-fill-danger: var(--kubik-interface-color-error, #dc2626);
+  --kubik-chart-text: var(--kubik-interface-color-grey-700);
+  --kubik-chart-muted: var(--kubik-interface-color-grey-600);
+  --kubik-chart-border: var(--kubik-interface-color-grey-200);
+}
