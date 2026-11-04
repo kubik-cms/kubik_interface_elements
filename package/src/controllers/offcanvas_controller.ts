@@ -2,6 +2,23 @@ import { Controller } from '@hotwired/stimulus'
 
 const OFFCANVAS_FRAME_ID = 'kubik_offcanvas_frame'
 
+const OFFCANVAS_TEMPLATE_HTML = `<template id='kubik-offcanvas-template' data-kubik-offcanvas-target='offcanvasTemplate'>
+        <div id='kubik-offcanvas' class='kubik-offcanvas' data-kubik-offcanvas-target='offcanvasContainer' aria-hidden='true'>
+          <div class='kubik-offcanvas-backdrop' data-action='click->kubik-offcanvas#closeOffcanvas'></div>
+          <div class='kubik-offcanvas-panel kubik-offcanvas-panel--end' data-kubik-offcanvas-target='offcanvasPanel' role='dialog' aria-modal='true'>
+            <div class='kubik-offcanvas-header'>
+              <div data-kubik-offcanvas-target='offcanvasHeader' class='kubik-offcanvas-title'></div>
+              <button type='button' class='kubik-offcanvas-close' aria-label='Close' data-action='click->kubik-offcanvas#closeOffcanvas'>
+                <span class='material-symbols-outlined material-icon'>close</span>
+              </button>
+            </div>
+            <div class='kubik-offcanvas-body'>
+              <turbo-frame id='${OFFCANVAS_FRAME_ID}' class='kubik-offcanvas-content' data-kubik-offcanvas-target='offcanvasFrame'></turbo-frame>
+            </div>
+          </div>
+        </div>
+      </template>`
+
 export default class extends Controller {
   offcanvasTemplateTarget: HTMLElement
   offcanvasHeaderValue: string
@@ -35,25 +52,7 @@ export default class extends Controller {
   }
 
   initialize (): void {
-    document.head.insertAdjacentHTML(
-      'beforeend',
-      `<template id='kubik-offcanvas-template' data-kubik-offcanvas-target='offcanvasTemplate'>
-        <div id='kubik-offcanvas' class='kubik-offcanvas' data-kubik-offcanvas-target='offcanvasContainer' aria-hidden='true'>
-          <div class='kubik-offcanvas-backdrop' data-action='click->kubik-offcanvas#closeOffcanvas'></div>
-          <div class='kubik-offcanvas-panel kubik-offcanvas-panel--end' data-kubik-offcanvas-target='offcanvasPanel' role='dialog' aria-modal='true'>
-            <div class='kubik-offcanvas-header'>
-              <div data-kubik-offcanvas-target='offcanvasHeader' class='kubik-offcanvas-title'></div>
-              <button type='button' class='kubik-offcanvas-close' aria-label='Close' data-action='click->kubik-offcanvas#closeOffcanvas'>
-                <span class='material-symbols-outlined material-icon'>close</span>
-              </button>
-            </div>
-            <div class='kubik-offcanvas-body'>
-              <turbo-frame id='${OFFCANVAS_FRAME_ID}' class='kubik-offcanvas-content' data-kubik-offcanvas-target='offcanvasFrame'></turbo-frame>
-            </div>
-          </div>
-        </div>
-      </template>`
-    )
+    this._ensureOffcanvasTemplateInHead()
   }
 
   connect (): void {
@@ -95,7 +94,7 @@ export default class extends Controller {
   }
 
   get offcanvasTemplate (): string {
-    return this.offcanvasTemplateTarget.innerHTML
+    return this._offcanvasMarkup()
   }
 
   offcanvasStatusValueChanged (): void {
@@ -200,9 +199,24 @@ export default class extends Controller {
     this.offcanvasFrameTarget.innerHTML = ''
   }
 
+  _ensureOffcanvasTemplateInHead (): void {
+    if (!document.getElementById('kubik-offcanvas-template')) {
+      document.head.insertAdjacentHTML('beforeend', OFFCANVAS_TEMPLATE_HTML)
+    }
+  }
+
+  _offcanvasMarkup (): string {
+    this._ensureOffcanvasTemplateInHead()
+    const template = document.getElementById('kubik-offcanvas-template') as HTMLTemplateElement | null
+    return template?.innerHTML ?? ''
+  }
+
   _renderDOMElements (): void {
     if (!document.getElementById('kubik-offcanvas')) {
-      document.body.insertAdjacentHTML('beforeend', this.offcanvasTemplate)
+      const markup = this._offcanvasMarkup()
+      if (markup) {
+        document.body.insertAdjacentHTML('beforeend', markup)
+      }
     }
   }
 }

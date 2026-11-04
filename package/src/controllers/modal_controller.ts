@@ -55,7 +55,7 @@ export default class extends Controller {
   }
 
   get modalTemplate (): string {
-    return this.modalTemplateTarget.innerHTML
+    return this._modalMarkup()
   }
 
   selectModal (e: Event): void {
@@ -146,9 +146,24 @@ export default class extends Controller {
     this.modalReturnPayloadValue = {}
   }
 
+  _ensureModalTemplateInHead (): void {
+    if (!document.getElementById('kubik-modal-template')) {
+      document.head.insertAdjacentHTML('beforeend', modalTemplateHtml(DEFAULT_MODAL_FRAME_ID))
+    }
+  }
+
+  _modalMarkup (): string {
+    this._ensureModalTemplateInHead()
+    const template = document.getElementById('kubik-modal-template') as HTMLTemplateElement | null
+    return template?.innerHTML ?? ''
+  }
+
   _renderDOMElements (): void {
     if (!document.getElementById('kubik-modal')) {
-      document.body.insertAdjacentHTML('beforeend', this.modalTemplate)
+      const markup = this._modalMarkup()
+      if (markup) {
+        document.body.insertAdjacentHTML('beforeend', markup)
+      }
     }
   }
 }

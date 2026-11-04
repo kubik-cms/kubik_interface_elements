@@ -1,8 +1,17 @@
 ## [Unreleased]
 
-### Added
+## [0.2.13] - 2026-11-04
 
-- `kubik-interface-tabbed` Stimulus controller and token-based tab switcher styles; pane errors via `kubik-interface-tabbed__message--error`.
+### Changed
+
+- Modal controller: honour `data-kubik-modal-frame-id` when loading Turbo frame content; safer teardown when closing.
+- Offcanvas controller: improved focus trap, backdrop handling, and panel visibility when nested in tabbed admin layouts.
+- Tabbed panels controller: clearer error surfacing for invalid pane targets.
+- Admin fieldset, filter/tag, and offcanvas SCSS tweaks for WYSIWYG widget panels.
+
+### Package
+
+- `@kubik-cms/interface_elements` **0.1.17** — rebuild `package/` after pull.
 
 ## [0.2.11] - 2026-09-28
 

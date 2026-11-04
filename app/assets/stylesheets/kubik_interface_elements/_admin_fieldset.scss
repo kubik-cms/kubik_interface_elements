@@ -149,11 +149,12 @@
       display: none;
     }
 
-    > div[id]:target {
+    > div[id]:target,
+    > div[id]:has(:target) {
       display: block;
     }
 
-    &:not(:has(> div[id]:target)) > div[id]:first-child {
+    &:not(:has(> div[id]:target, > div[id]:has(:target))) > div[id]:first-child {
       display: block;
     }
 

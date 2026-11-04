@@ -365,8 +365,12 @@
 
 .kubik-interface-tags-field,
 li.string.input.stringish.kubik-interface-tags-field {
-  .kubik-interface-typeahead input[type="text"] {
+  .kubik-interface-typeahead input[type="text"],
+  .kubik-interface-tags-field__input {
+    @include kubik-form-input-text;
     width: 100%;
+    margin-bottom: 0;
+    box-sizing: border-box;
   }
 }
 

@@ -1,10 +1,11 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['tab', 'pane']
+  static targets = ['tab', 'pane', 'action']
 
   declare readonly tabTargets: HTMLElement[]
   declare readonly paneTargets: HTMLElement[]
+  declare readonly actionTargets: HTMLElement[]
 
   switchTab(event: Event): void {
     const button = event.currentTarget as HTMLElement
@@ -17,6 +18,9 @@ export default class extends Controller {
       el.setAttribute('aria-selected', selected ? 'true' : 'false')
     })
     this.paneTargets.forEach((el) => {
+      el.classList.toggle('is-active', el.dataset.panelId === panelId)
+    })
+    this.actionTargets.forEach((el) => {
       el.classList.toggle('is-active', el.dataset.panelId === panelId)
     })
   }
