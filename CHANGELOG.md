@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Package
+
+- `@kubik-cms/interface_elements` **0.1.18** — version bump; rebuild `package/` when JS changes land.
+
 ## [0.2.13] - 2026-11-04
 
 ### Changed
