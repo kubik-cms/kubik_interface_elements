@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+### Added
+
+- Dart Sass `admin_sass_entry` (no CSS `@import` of `components/index.css`).
+- Active Admin head prepend on `to_prepare` so Material Symbols load even when Active Admin is already loaded.
+
+## [0.2.14] - 2026-11-06
+
 ### Package
 
 - `@kubik-cms/interface_elements` **0.1.18** — version bump; rebuild `package/` when JS changes land.

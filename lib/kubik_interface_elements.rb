@@ -30,18 +30,33 @@ module KubikInterfaceElements
       initializer :kubik_interface_elements_active_admin do
         ActiveSupport.on_load(:active_admin) do
           ActiveAdmin.application.load_paths += Dir[File.join(__dir__, "arbre")]
+        end
+      end
 
-          module KubikInterfaceElements::ActiveAdminHeadOverride
-            def build_active_admin_head
-              within super do
-                render "admin/kubik/interface_elements/additional_headers"
+      initializer :kubik_interface_elements_active_admin_head do
+        hook = -> { KubikInterfaceElements::Rails::Engine.prepend_active_admin_head }
+        ActiveSupport.on_load(:active_admin, &hook)
+        ::Rails.application.config.to_prepare(&hook)
+      end
+
+      def self.prepend_active_admin_head
+        return unless defined?(ActiveAdmin::Views::Pages::Base)
+
+        unless defined?(KubikInterfaceElements::ActiveAdminHeadOverride)
+          KubikInterfaceElements.const_set(
+            :ActiveAdminHeadOverride,
+            Module.new do
+              def build_active_admin_head
+                within super do
+                  render "admin/kubik/interface_elements/additional_headers"
+                end
               end
-            end
-          end
+            end,
+          )
+        end
 
-          unless ActiveAdmin::Views::Pages::Base < KubikInterfaceElements::ActiveAdminHeadOverride
-            ActiveAdmin::Views::Pages::Base.prepend(KubikInterfaceElements::ActiveAdminHeadOverride)
-          end
+        unless ActiveAdmin::Views::Pages::Base < KubikInterfaceElements::ActiveAdminHeadOverride
+          ActiveAdmin::Views::Pages::Base.prepend(KubikInterfaceElements::ActiveAdminHeadOverride)
         end
       end
 
